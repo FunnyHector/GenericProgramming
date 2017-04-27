@@ -9,9 +9,18 @@ import org.jgap.gp.impl.GPGenotype;
 import org.jgap.gp.terminal.Terminal;
 import org.jgap.gp.terminal.Variable;
 
+/**
+ * This class represents a symbolic regression problem.
+ */
 public class SymbolicRegressionProblem extends GPProblem {
-    private static double MIN_TERMINAL = 0.0d;
-    private static double MAX_TERMINAL = 100.0d;
+
+    /**
+     * The variable name used in the genetic programme
+     */
+    static final String VARIABLE_NAME = "X";
+
+    private static final double MIN_TERMINAL = 0.0d;
+    private static final double MAX_TERMINAL = 100.0d;
 
     /**
      * Constructor
@@ -37,7 +46,7 @@ public class SymbolicRegressionProblem extends GPProblem {
         CommandGene[][] nodeSets = {
                 {
                         // the variable node
-                        Variable.create(configuration, "X", CommandGene.FloatClass),
+                        Variable.create(configuration, VARIABLE_NAME, CommandGene.FloatClass),
 
                         // a constant
                         new Terminal(configuration, CommandGene.FloatClass, MIN_TERMINAL, MAX_TERMINAL, true),
