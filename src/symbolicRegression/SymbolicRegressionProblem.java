@@ -17,7 +17,7 @@ public class SymbolicRegressionProblem extends GPProblem {
     /**
      * The variable name used in the genetic programme
      */
-    static final String VARIABLE_NAME = "X";
+    public static final String VARIABLE_NAME = "X";
 
     private static final double MIN_TERMINAL = 0.0d;
     private static final double MAX_TERMINAL = 100.0d;

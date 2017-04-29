@@ -70,4 +70,12 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
+
+### personal rules
 *.iml
+bo/
+
+/test_set.data
+/training_set.data
+/classification_tree.png
+/symbolic_regression_tree.png

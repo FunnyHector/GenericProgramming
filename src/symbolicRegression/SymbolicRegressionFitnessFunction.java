@@ -27,13 +27,13 @@ public class SymbolicRegressionFitnessFunction extends GPFitnessFunction {
 
     @Override
     protected double evaluate(IGPProgram gpProgram) {
+        Variable variable = gpProgram.getGPConfiguration().getVariable(SymbolicRegressionProblem.VARIABLE_NAME);
         double error = 0.0f;
 
         // Evaluate function for each input
         for (int i = 0; i < inputs.size(); i++) {
             // let the variable X be the input
             float input = inputs.get(i);
-            Variable variable = gpProgram.getGPConfiguration().getVariable(SymbolicRegressionProblem.VARIABLE_NAME);
             variable.set(input);
 
             try {

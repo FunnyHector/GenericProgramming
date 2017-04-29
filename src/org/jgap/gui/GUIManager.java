@@ -9,12 +9,13 @@
  */
 package org.jgap.gui;
 
-import java.util.*;
+import org.jgap.Configuration;
+import org.jgap.data.config.Configurable;
 
 import javax.swing.*;
-
-import org.jgap.*;
-import org.jgap.data.config.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Singleton GUIManager for the JGAP Configurator.
@@ -113,7 +114,7 @@ public class GUIManager {
   }
 
   /**
-   * Main method for the GUI
+   * SymbolicRegressionMain method for the GUI
    * @param args not used
    * @throws Exception
    *
