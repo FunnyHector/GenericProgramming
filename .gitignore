@@ -73,7 +73,6 @@ fabric.properties
 
 ### personal rules
 *.iml
-bo/
 
 /test_set.data
 /training_set.data

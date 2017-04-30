@@ -114,6 +114,14 @@ public class ClassificationMain {
         return config;
     }
 
+    /**
+     * Check the accuracy of the given programme on given instance set. The accuracy is measured by the
+     * percentage of correctly classified instances
+     *
+     * @param gpProgram
+     * @param instances
+     * @return
+     */
     private static float checkAccuracy(IGPProgram gpProgram, List<CancerInstance> instances) {
         // 9 variables
         Variable feature1 = gpProgram.getGPConfiguration().getVariable(ClassificationProblem.FEATURE_1);
