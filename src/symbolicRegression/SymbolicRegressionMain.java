@@ -20,8 +20,8 @@ import java.util.Scanner;
  */
 public class SymbolicRegressionMain {
     private static final String DEFAULT_FILE = "regression.txt";
-    private static final int DEFAULT_POPULATION = 1000;
-    private static final int DEFAULT_NUM_EVOLUTIONS = 800;
+    private static final int DEFAULT_POPULATION = 800;
+    private static final int DEFAULT_NUM_EVOLUTIONS = 500;
 
     /**
      * Main function
@@ -48,17 +48,6 @@ public class SymbolicRegressionMain {
             IGPProgram bestProgramme = gp.getAllTimeBest();
             gp.outputSolution(bestProgramme);
             problem.showTree(bestProgramme, "symbolic_regression_tree.png");
-
-            // My own output
-            System.out.println("====================================");
-            System.out.println("The best 3 programmes:");
-
-            List<IGPProgram> threeBest = (List<IGPProgram>) gp.getGPPopulation().determineFittestChromosomes(3);
-
-            threeBest.forEach(program -> {
-                System.out.println(" - Programme: " + program.toStringNorm(0));
-                System.out.println("   Fitness :" + program.getFitnessValue());
-            });
 
         } catch (InvalidConfigurationException e) {
             abort(e, "Invalid Configuration Exception.");

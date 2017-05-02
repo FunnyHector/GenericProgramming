@@ -55,7 +55,7 @@ public class SymbolicRegressionFitnessFunction extends GPFitnessFunction {
         }
 
         // if the error is small enough, consider it perfect.
-        if (error < 0.0001) {
+        if (error < 0.001) {
             error = 0.0d;
         }
 

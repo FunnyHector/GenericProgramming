@@ -20,7 +20,7 @@ public class SymbolicRegressionProblem extends GPProblem {
     public static final String VARIABLE_NAME = "X";
 
     private static final double MIN_TERMINAL = 0.0d;
-    private static final double MAX_TERMINAL = 100.0d;
+    private static final double MAX_TERMINAL = 2.0d;
 
     /**
      * Constructor
@@ -55,7 +55,7 @@ public class SymbolicRegressionProblem extends GPProblem {
                         new Add(configuration, CommandGene.FloatClass),
                         new Subtract(configuration, CommandGene.FloatClass),
                         new Multiply(configuration, CommandGene.FloatClass),
-                        new Divide(configuration, CommandGene.FloatClass)
+                        // new Divide(configuration, CommandGene.FloatClass)
                 }
         };
 

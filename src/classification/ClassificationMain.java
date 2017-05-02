@@ -57,16 +57,16 @@ public class ClassificationMain {
             problem.showTree(bestProgramme, "classification_tree.png");
 
             // 7. My own output
-            System.out.println("====================================");
-            System.out.println("The best 3 programmes:");
+            // System.out.println("====================================");
+            // System.out.println("The best 3 programmes:");
 
-            @SuppressWarnings("unchecked")
-            List<IGPProgram> threeBest = (List<IGPProgram>) gp.getGPPopulation().determineFittestChromosomes(3);
+            // @SuppressWarnings("unchecked")
+            // List<IGPProgram> threeBest = (List<IGPProgram>) gp.getGPPopulation().determineFittestChromosomes(3);
 
-            threeBest.forEach(program -> {
-                System.out.println(" - Programme: " + program.toStringNorm(0));
-                System.out.println("   Fitness :" + program.getFitnessValue());
-            });
+            // threeBest.forEach(program -> {
+            //     System.out.println(" - Programme: " + program.toStringNorm(0));
+            //     System.out.println("   Fitness :" + program.getFitnessValue());
+            // });
 
             // 8. Test the accuracy with the best solution
             float accuracyTraining = checkAccuracy(bestProgramme, trainingSet);
