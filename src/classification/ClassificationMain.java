@@ -16,8 +16,8 @@ import java.util.List;
  */
 public class ClassificationMain {
 
-    private static final int DEFAULT_POPULATION = 1000;
-    private static final int DEFAULT_NUM_EVOLUTIONS = 800;
+    private static final int DEFAULT_POPULATION = 500;
+    private static final int DEFAULT_NUM_EVOLUTIONS = 500;
 
     private static List<CancerInstance> trainingSet;
     private static List<CancerInstance> testSet;
