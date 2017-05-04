@@ -92,7 +92,7 @@ public class SymbolicRegressionMain {
      * Generate the fitness function from the file that contains input and output values.
      */
     private static GPFitnessFunction generateFitnessFunction() {
-        String trainingFilePath = ClassLoader.getSystemResource(DEFAULT_FILE).getPath();
+        String trainingFilePath = SymbolicRegressionMain.class.getClassLoader().getResource(DEFAULT_FILE).getPath();
 
         List<Float> inputs = new ArrayList<>();
         List<Float> outputs = new ArrayList<>();

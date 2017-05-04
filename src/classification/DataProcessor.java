@@ -24,7 +24,7 @@ public class DataProcessor {
      * @return
      */
     public static List<CancerInstance> readInData() {
-        String filePath = ClassLoader.getSystemResource(DATA_FILE).getPath();
+        String filePath = DataProcessor.class.getClassLoader().getResource(DATA_FILE).getPath();
         List<CancerInstance> instances = new ArrayList<>();
 
         try (Scanner scanner = new Scanner(new File(filePath))) {
