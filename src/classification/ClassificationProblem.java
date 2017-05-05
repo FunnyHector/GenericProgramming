@@ -65,9 +65,9 @@ public class ClassificationProblem extends GPProblem {
                         Variable.create(configuration, FEATURE_9, CommandGene.FloatClass),
 
                         // one or more constant
-                        new Terminal(configuration, CommandGene.FloatClass, MIN_TERMINAL, MAX_TERMINAL, true),
-                        // new Terminal(configuration, CommandGene.FloatClass, 20, 40, true),
-                        // new Terminal(configuration, CommandGene.FloatClass, 40, 60, true),
+                        new Terminal(configuration, CommandGene.FloatClass, MIN_TERMINAL, MAX_TERMINAL, false),
+                        // new Terminal(configuration, CommandGene.FloatClass, MIN_TERMINAL, MAX_TERMINAL, false),
+                        // new Terminal(configuration, CommandGene.FloatClass, MIN_TERMINAL, MAX_TERMINAL, false),
 
                         // functions. Here "+", "-", "*", "/" are used
                         new Add(configuration, CommandGene.FloatClass),
@@ -86,6 +86,6 @@ public class ClassificationProblem extends GPProblem {
         };
 
         // create genotype with initial population
-        return GPGenotype.randomInitialGenotype(configuration, types, argTypes, nodeSets, 40, true);
+        return GPGenotype.randomInitialGenotype(configuration, types, argTypes, nodeSets, 80, true);
     }
 }

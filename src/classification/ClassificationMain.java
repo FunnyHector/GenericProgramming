@@ -16,8 +16,8 @@ import java.util.List;
  */
 public class ClassificationMain {
 
-    private static final int DEFAULT_POPULATION = 500;
-    private static final int DEFAULT_NUM_EVOLUTIONS = 500;
+    private static final int DEFAULT_POPULATION = 1500;
+    private static final int DEFAULT_NUM_EVOLUTIONS = 1000;
 
     private static List<CancerInstance> trainingSet;
     private static List<CancerInstance> testSet;
@@ -93,15 +93,15 @@ public class ClassificationMain {
             config = new GPConfiguration();
 
             // ================ PARAMETERS =======================
-            // config.setCrossoverProb(0.9f);  // CrossoverProb + ReproductionProb = 1.0f
-            // config.setReproductionProb(0.1f);
-            // config.setMutationProb(0.1f);
+            config.setCrossoverProb(0.8f);  // CrossoverProb + ReproductionProb = 1.0f
+            config.setReproductionProb(0.2f);
+            config.setMutationProb(0.3f);
             // config.setDynamizeArityProb(0.08f);  // The probability that the arity of a node is changed during growing a program.
             // config.setNewChromsPercent(0.3f);  // Percentage of the population that will be filled with new individuals during evolution. Must be between 0.0d and 1.0d.
             // config.setFunctionProb(0.9f);  // In crossover: If random number (0..1) < this value, then choose a function otherwise a terminal.
-            // config.setMaxCrossoverDepth(17);  // The maximum depth of an individual resulting from crossover.
-            // config.setMaxInitDepth(7);  // The maximum depth of an individual when the world is created.
-            // config.setMinInitDepth(2);  // The minimum depth of an individual when the world is created.
+            config.setMaxCrossoverDepth(40);  // The maximum depth of an individual resulting from crossover.
+            config.setMaxInitDepth(20);  // The maximum depth of an individual when the world is created.
+            config.setMinInitDepth(10);  // The minimum depth of an individual when the world is created.
 
             config.setGPFitnessEvaluator(new DefaultGPFitnessEvaluator());
             config.setPopulationSize(DEFAULT_POPULATION);

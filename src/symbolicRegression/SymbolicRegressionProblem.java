@@ -19,8 +19,8 @@ public class SymbolicRegressionProblem extends GPProblem {
      */
     public static final String VARIABLE_NAME = "X";
 
-    private static final double MIN_TERMINAL = 0.0d;
-    private static final double MAX_TERMINAL = 2.0d;
+    private static final double MIN_TERMINAL = 0.0f;
+    private static final double MAX_TERMINAL = 2.0f;
 
     /**
      * Constructor
