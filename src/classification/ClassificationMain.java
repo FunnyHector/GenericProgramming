@@ -16,8 +16,8 @@ import java.util.List;
  */
 public class ClassificationMain {
 
-    private static final int DEFAULT_POPULATION = 1500;
-    private static final int DEFAULT_NUM_EVOLUTIONS = 1000;
+    private static final int DEFAULT_POPULATION = 800;
+    private static final int DEFAULT_NUM_EVOLUTIONS = 600;
 
     private static List<CancerInstance> trainingSet;
     private static List<CancerInstance> testSet;
@@ -28,6 +28,13 @@ public class ClassificationMain {
      * @param args
      */
     public static void main(String[] args) {
+        new ClassificationMain().run();
+    }
+
+    /**
+     * Process steps
+     */
+    private void run() {
         // 0. initialise log4j
         PropertyConfigurator.configure("log4j.properties");
 
@@ -54,21 +61,8 @@ public class ClassificationMain {
             // 6. show results to the console and generate the png image file
             IGPProgram bestProgramme = gp.getAllTimeBest();
             gp.outputSolution(bestProgramme);
-            problem.showTree(bestProgramme, "classification_tree.png");
 
-            // 7. My own output
-            // System.out.println("====================================");
-            // System.out.println("The best 3 programmes:");
-
-            // @SuppressWarnings("unchecked")
-            // List<IGPProgram> threeBest = (List<IGPProgram>) gp.getGPPopulation().determineFittestChromosomes(3);
-
-            // threeBest.forEach(program -> {
-            //     System.out.println(" - Programme: " + program.toStringNorm(0));
-            //     System.out.println("   Fitness :" + program.getFitnessValue());
-            // });
-
-            // 8. Test the accuracy with the best solution
+            // 7. Test the accuracy with the best solution
             float accuracyTraining = checkAccuracy(bestProgramme, trainingSet);
             float accuracyTest = checkAccuracy(bestProgramme, testSet);
 
@@ -86,22 +80,22 @@ public class ClassificationMain {
      *
      * @return
      */
-    private static GPConfiguration setConfiguration() {
+    private GPConfiguration setConfiguration() {
         GPConfiguration config = null;
 
         try {
             config = new GPConfiguration();
 
             // ================ PARAMETERS =======================
-            config.setCrossoverProb(0.8f);  // CrossoverProb + ReproductionProb = 1.0f
-            config.setReproductionProb(0.2f);
-            config.setMutationProb(0.3f);
+            // config.setCrossoverProb(0.9f);  // CrossoverProb + ReproductionProb = 1.0f
+            // config.setReproductionProb(0.1f);
+            // config.setMutationProb(0.3f);
             // config.setDynamizeArityProb(0.08f);  // The probability that the arity of a node is changed during growing a program.
             // config.setNewChromsPercent(0.3f);  // Percentage of the population that will be filled with new individuals during evolution. Must be between 0.0d and 1.0d.
             // config.setFunctionProb(0.9f);  // In crossover: If random number (0..1) < this value, then choose a function otherwise a terminal.
-            config.setMaxCrossoverDepth(40);  // The maximum depth of an individual resulting from crossover.
-            config.setMaxInitDepth(20);  // The maximum depth of an individual when the world is created.
-            config.setMinInitDepth(10);  // The minimum depth of an individual when the world is created.
+            config.setMaxCrossoverDepth(10);  // The maximum depth of an individual resulting from crossover.
+            config.setMaxInitDepth(5);  // The maximum depth of an individual when the world is created.
+            // config.setMinInitDepth(2);  // The minimum depth of an individual when the world is created.
 
             config.setGPFitnessEvaluator(new DefaultGPFitnessEvaluator());
             config.setPopulationSize(DEFAULT_POPULATION);
@@ -122,7 +116,7 @@ public class ClassificationMain {
      * @param instances
      * @return
      */
-    private static float checkAccuracy(IGPProgram gpProgram, List<CancerInstance> instances) {
+    private float checkAccuracy(IGPProgram gpProgram, List<CancerInstance> instances) {
         // 9 variables
         Variable feature1 = gpProgram.getGPConfiguration().getVariable(ClassificationProblem.FEATURE_1);
         Variable feature2 = gpProgram.getGPConfiguration().getVariable(ClassificationProblem.FEATURE_2);
@@ -168,7 +162,7 @@ public class ClassificationMain {
      * @param e
      * @param message
      */
-    private static void abort(Exception e, String message) {
+    private void abort(Exception e, String message) {
         System.err.println(message);
         e.printStackTrace();
         System.exit(-1);

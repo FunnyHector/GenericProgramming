@@ -7,8 +7,8 @@ import java.util.Arrays;
  */
 public class CancerInstance {
 
-    public static final int BENIGN_VALUE = 2;
-    public static final int MALIGNANT_VALUE = 4;
+    private static final int BENIGN_VALUE = 2;
+    private static final int MALIGNANT_VALUE = 4;
 
     public final int id;
     public final int[] features;

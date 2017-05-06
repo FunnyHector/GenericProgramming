@@ -86,6 +86,6 @@ public class ClassificationProblem extends GPProblem {
         };
 
         // create genotype with initial population
-        return GPGenotype.randomInitialGenotype(configuration, types, argTypes, nodeSets, 80, true);
+        return GPGenotype.randomInitialGenotype(configuration, types, argTypes, nodeSets, 40, true);
     }
 }

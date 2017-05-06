@@ -9,8 +9,7 @@ import org.jgap.gp.impl.DeltaGPFitnessEvaluator;
 import org.jgap.gp.impl.GPConfiguration;
 import org.jgap.gp.impl.GPGenotype;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -19,7 +18,7 @@ import java.util.Scanner;
  * The entry class (where main function is) for Symbolic Regression programme.
  */
 public class SymbolicRegressionMain {
-    private static final String DEFAULT_FILE = "regression.txt";
+    private static final String DEFAULT_FILE = "/regression.txt";
     private static final int DEFAULT_POPULATION = 800;
     private static final int DEFAULT_NUM_EVOLUTIONS = 500;
 
@@ -29,6 +28,13 @@ public class SymbolicRegressionMain {
      * @param args
      */
     public static void main(String[] args) {
+        new SymbolicRegressionMain().run();
+    }
+
+    /**
+     * Process steps
+     */
+    private void run() {
         // initialise log4j
         PropertyConfigurator.configure("log4j.properties");
 
@@ -47,7 +53,6 @@ public class SymbolicRegressionMain {
             // show results to the console and generate the png image file
             IGPProgram bestProgramme = gp.getAllTimeBest();
             gp.outputSolution(bestProgramme);
-            problem.showTree(bestProgramme, "symbolic_regression_tree.png");
 
         } catch (InvalidConfigurationException e) {
             abort(e, "Invalid Configuration Exception.");
@@ -59,7 +64,7 @@ public class SymbolicRegressionMain {
      *
      * @return
      */
-    private static GPConfiguration setConfiguration() {
+    private GPConfiguration setConfiguration() {
         GPConfiguration config = null;
 
         try {
@@ -91,32 +96,28 @@ public class SymbolicRegressionMain {
     /**
      * Generate the fitness function from the file that contains input and output values.
      */
-    private static GPFitnessFunction generateFitnessFunction() {
-        String trainingFilePath = SymbolicRegressionMain.class.getClassLoader().getResource(DEFAULT_FILE).getPath();
-
+    private GPFitnessFunction generateFitnessFunction() {
         List<Float> inputs = new ArrayList<>();
         List<Float> outputs = new ArrayList<>();
 
-        try (Scanner scanner = new Scanner(new File(trainingFilePath))) {
-            // skip empty lines
-            scanner.nextLine();
-            scanner.nextLine();
+        InputStream inputStream = SymbolicRegressionMain.class.getResourceAsStream(DEFAULT_FILE);
+        Scanner scanner = new Scanner(inputStream);
 
-            // read in the file
-            ArrayList<String> lines = new ArrayList<>();
-            while (scanner.hasNextLine()) {
-                lines.add(scanner.nextLine());
-            }
+        // skip empty lines
+        scanner.nextLine();
+        scanner.nextLine();
 
-            lines.forEach(line -> {
-                String[] values = line.trim().split("\\s+");
-                inputs.add(Float.parseFloat(values[0]));
-                outputs.add(Float.parseFloat(values[1]));
-            });
-
-        } catch (FileNotFoundException e) {
-            abort(e, "File Not Found.");
+        // read in the file
+        ArrayList<String> lines = new ArrayList<>();
+        while (scanner.hasNextLine()) {
+            lines.add(scanner.nextLine());
         }
+
+        lines.forEach(line -> {
+            String[] values = line.trim().split("\\s+");
+            inputs.add(Float.parseFloat(values[0]));
+            outputs.add(Float.parseFloat(values[1]));
+        });
 
         return new SymbolicRegressionFitnessFunction(inputs, outputs);
     }
@@ -127,7 +128,7 @@ public class SymbolicRegressionMain {
      * @param e
      * @param message
      */
-    private static void abort(Exception e, String message) {
+    private void abort(Exception e, String message) {
         System.err.println(message);
         e.printStackTrace();
         System.exit(-1);

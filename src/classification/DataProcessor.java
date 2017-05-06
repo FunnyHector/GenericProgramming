@@ -1,8 +1,6 @@
 package classification;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
@@ -13,7 +11,7 @@ import java.util.stream.Collectors;
  */
 public class DataProcessor {
 
-    private static final String DATA_FILE = "breast-cancer-wisconsin.data";
+    private static final String DATA_FILE = "/breast-cancer-wisconsin.data";
     private static final String TRAINING_FILE = "training_set.data";
     private static final String TEST_FILE = "test_set.data";
     private static final float SPLIT_PORTION = 0.8f;
@@ -24,23 +22,20 @@ public class DataProcessor {
      * @return
      */
     public static List<CancerInstance> readInData() {
-        String filePath = DataProcessor.class.getClassLoader().getResource(DATA_FILE).getPath();
+        InputStream inputStream = DataProcessor.class.getResourceAsStream(DATA_FILE);
         List<CancerInstance> instances = new ArrayList<>();
 
-        try (Scanner scanner = new Scanner(new File(filePath))) {
-            while (scanner.hasNextLine()) {
-                List<String> values = new ArrayList<>(Arrays.asList(scanner.nextLine().split(",")));
+        Scanner scanner = new Scanner(inputStream);
+        while (scanner.hasNextLine()) {
+            List<String> values = new ArrayList<>(Arrays.asList(scanner.nextLine().split(",")));
 
-                int id = Integer.parseInt(values.remove(0));
-                int label = Integer.parseInt(values.remove(values.size() - 1));
-                int[] features = values.stream()
-                        .mapToInt(value -> Integer.parseInt(value.equals("?") ? "-1" : value))
-                        .toArray();
+            int id = Integer.parseInt(values.remove(0));
+            int label = Integer.parseInt(values.remove(values.size() - 1));
+            int[] features = values.stream()
+                    .mapToInt(value -> Integer.parseInt(value.equals("?") ? "-1" : value))
+                    .toArray();
 
-                instances.add(new CancerInstance(id, features, label));
-            }
-        } catch (FileNotFoundException e) {
-            abort(e, "File Not Found.");
+            instances.add(new CancerInstance(id, features, label));
         }
 
         return instances;
